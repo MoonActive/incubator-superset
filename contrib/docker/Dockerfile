@@ -25,7 +25,7 @@ ENV LANG=C.UTF-8 \
 RUN apt-get update -y
 
 # Install dependencies to fix `curl https support error` and `elaying package configuration warning`
-RUN apt-get install -y apt-transport-https apt-utils
+RUN apt-get install -y apt-transport-https apt-utils ca-certificates
 
 # Install superset dependencies
 # https://superset.incubator.apache.org/installation.html#os-dependencies
@@ -49,6 +49,9 @@ COPY requirements-dev.txt .
 RUN pip install --upgrade setuptools pip \
     && pip install -r requirements.txt -r requirements-dev.txt \
     && rm -rf /root/.cache/pip
+
+COPY contrib/docker/imply-crt-new.crt /usr/local/share/ca-certificates/mycert.crt
+RUN update-ca-certificates
 
 COPY --chown=superset:superset superset superset
 
