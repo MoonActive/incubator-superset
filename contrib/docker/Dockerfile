@@ -52,6 +52,8 @@ RUN pip install --upgrade setuptools pip \
 
 COPY contrib/docker/imply-crt-new.crt /usr/local/share/ca-certificates/mycert.crt
 RUN update-ca-certificates
+ENV REQUESTS_CA_BUNDLE=/usr/local/share/ca-certificates/mycert.crt
+
 
 COPY --chown=superset:superset superset superset
 
