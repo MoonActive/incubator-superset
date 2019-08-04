@@ -42,12 +42,12 @@ services:
       dockerfile: contrib/docker/Dockerfile
     restart: unless-stopped
     environment:
-      POSTGRES_DB: superset
-      POSTGRES_USER: superset
-      POSTGRES_PASSWORD: superset
-      POSTGRES_HOST: postgres
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Druidimply123
+      POSTGRES_HOST: database-superset.cs5upsouv669.us-east-1.rds.amazonaws.com
       POSTGRES_PORT: 5432
-      REDIS_HOST: redis
+      REDIS_HOST: redis-superset-test.y2hudd.ng.0001.use1.cache.amazonaws.com
       REDIS_PORT: 6379
       # If using production, comment development volume below
       #SUPERSET_ENV: production
