@@ -15,6 +15,13 @@
 # specific language governing permissions and limitations
 # under the License.
 import os
+from flask_appbuilder.security.manager import (
+    AUTH_DB,
+    AUTH_LDAP,
+    AUTH_OAUTH,
+    AUTH_OID,
+    AUTH_REMOTE_USER
+)
 
 
 def get_env_variable(var_name, default=None):
@@ -57,9 +64,24 @@ class CeleryConfig(object):
 
 CELERY_CONFIG = CeleryConfig
 
-CACHE_CONFIG = {
-    'CACHE_TYPE': 'redis',
-    'CACHE_DEFAULT_TIMEOUT': 60 * 60 * 24, # 1 day default (in secs)
-    'CACHE_KEY_PREFIX': 'superset_results',
-    'CACHE_REDIS_URL': 'redis://redis:6379/0',
-}
+AUTH_TYPE = AUTH_OAUTH
+AUTH_USER_REGISTRATION = True
+AUTH_USER_REGISTRATION_ROLE = "Admin"
+CSRF_ENABLED = False
+
+#AUTH_TYPE=AUTH_DB
+
+OAUTH_PROVIDERS = [
+    {'name':'google','icon':'fa-google','token_key':'access_token',
+        'remote_app': {
+            'consumer_key':'634669298353-462a04r4vsdas06lsq8io1je09p617l8.apps.googleusercontent.com',
+            'consumer_secret':'reoUuDgZAbvNDjR_7gxRdXND',
+            'request_token_params':{'scope':'email profile'},
+            'base_url':'https://www.googleapis.com/oauth2/v2/',
+            'request_token_url': None,
+            'access_token_url':'https://accounts.google.com/o/oauth2/token',
+            'authorize_url':'https://accounts.google.com/o/oauth2/auth'}
+    },
+]
+
+
